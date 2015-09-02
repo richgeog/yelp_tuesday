@@ -13,3 +13,11 @@ feature 'reviewing' do
     expect(page).to have_content('so so')
   end
 end
+
+feature 'deleting reviews' do
+  before do
+    Restaurant.create name: 'pilpel'
+    
+  end
+end
+end

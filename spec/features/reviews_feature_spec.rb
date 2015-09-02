@@ -14,9 +14,17 @@ feature 'reviewing' do
   end
 end
 
-feature 'deleting reviews' do
-  before do
-    Restaurant.create name: 'pilpel'
-    
-  end
-end
+#feature 'deleting reviews' do
+ # before do
+  #  Restaurant.create name: 'Pilpel'
+   # restaurant = Restaurant.find(name: 'Pilpel')
+    #restaurant.reviews(thoughts: 'It was yummy', rating: 4)
+  #end
+
+ # scenario 'deletes all dependencies of the restaurant' do
+  #  visit '/restaurants'
+   # click_link 'Delete Pilpel'
+   # expect(page).not_to have_content 'Pilpel'
+   # expect()
+  #end
+#end

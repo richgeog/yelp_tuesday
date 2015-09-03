@@ -4,7 +4,8 @@ feature 'restaurants' do
 
   context 'no restaurants have been added' do
     scenario 'should display a prompt to add a restaurant' do
-      sign_up
+      user = build(:user)
+      sign_up(user)
       visit '/restaurants'
       expect(page).to have_content 'No restaurants yet'
        expect(page).to have_link 'Add a restaurant'
@@ -30,7 +31,8 @@ feature 'restaurants' do
       end
 
       scenario 'user must be logged in before creating restaurant' do
-        sign_up
+        user = build(:user)
+        sign_up(user)
         visit '/restaurants'
         click_link 'Add a restaurant'
         fill_in 'Name', with: 'KFC'
@@ -52,10 +54,26 @@ feature 'restaurants' do
     end
 
     context 'editing restaurants' do
-      before {Restaurant.create name: 'KFC'}
+      before(:each) do
+        user = build(:user)
+        sign_up(user)
+        visit '/restaurants'
+        click_link 'Add a restaurant'
+        fill_in 'Name', with: 'KFC'
+        click_button 'Create Restaurant'
+      end
 
-      scenario 'let a user edit a restaurant' do
-        sign_up
+      scenario 'user can not edit a restaurant if they did not create it' do
+
+        userina = build(:userina)
+        visit '/'
+        click_link 'Sign out'
+        sign_in(userina)
+        visit '/restaurants'
+        expect(page).not_to have_link('Edit KFC')
+      end
+
+      scenario 'only the creator can edit a restaurant' do
         visit '/restaurants'
         click_link 'Edit KFC'
         fill_in 'Name', with: 'Kentucky Fried Chicken'
@@ -69,7 +87,8 @@ feature 'restaurants' do
       before {Restaurant.create name: 'KFC'}
 
       scenario 'removes a restaurant when a user clicks a delete link' do
-        sign_up
+        user = build(:user)
+        sign_up(user)
         visit 'restaurants'
         click_link 'Delete KFC'
         expect(page).not_to have_content 'KFC'
@@ -79,7 +98,8 @@ feature 'restaurants' do
 
     context 'an invalid restaurant' do
       it 'does not let you submit a name that is too short' do
-        sign_up
+        user = build(:user)
+        sign_up(user)
         visit 'restaurants'
         click_link 'Add a restaurant'
         fill_in 'Name', with: 'kf'

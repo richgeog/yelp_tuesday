@@ -5,5 +5,8 @@ class Restaurant < ActiveRecord::Base
   belongs_to :user
 
   validates :name, length: {minimum: 3}, uniqueness: true
-end
 
+  def build_review(review, user)
+    self.reviews.new(thoughts: review[:thoughts], rating: review[:rating], user_id: user.id)
+  end
+end

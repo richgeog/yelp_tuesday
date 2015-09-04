@@ -64,13 +64,13 @@ feature 'restaurants' do
       end
 
       scenario 'user can not edit a restaurant if they did not create it' do
-
-        userina = build(:userina)
-        visit '/'
         click_link 'Sign out'
-        sign_in(userina)
+        userina = build(:userina)
+        sign_up(userina)
         visit '/restaurants'
-        expect(page).not_to have_link('Edit KFC')
+        click_link 'Edit KFC'
+        expect(current_path).to eq '/restaurants'
+        expect(page).to have_content 'Unable to edit as not the creator'
       end
 
       scenario 'only the creator can edit a restaurant' do
@@ -94,10 +94,9 @@ feature 'restaurants' do
       end
 
       scenario 'user can not deleta restaurant if they did not create it' do
-        userina = build(:userina)
-        visit '/'
         click_link 'Sign out'
-        sign_in(userina)
+        userina = build(:userina)
+        sign_up(userina)
         visit '/restaurants'
         expect(page).not_to have_link('Delete KFC')
       end

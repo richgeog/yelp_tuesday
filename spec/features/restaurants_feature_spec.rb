@@ -83,7 +83,7 @@ feature 'restaurants' do
       end
     end
 
-    context 'deletimg restaurants' do
+    context 'deleting restaurants' do
       before(:each) do
         user = build(:user)
         sign_up(user)
@@ -93,7 +93,7 @@ feature 'restaurants' do
         click_button 'Create Restaurant'
       end
 
-      scenario 'user can not deleta restaurant if they did not create it' do
+      scenario 'user can not delete restaurant if they did not create it' do
         click_link 'Sign out'
         userina = build(:userina)
         sign_up(userina)

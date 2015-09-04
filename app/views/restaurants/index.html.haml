@@ -21,6 +21,8 @@
             = link_to "Delete Review", restaurant_review_path(restaurant, review), method: :delete
     - else
       %p No reviews
+    %h3 Average rating: #{restaurant.average_rating.to_i}
+
 - else
   No restaurants yet!
 

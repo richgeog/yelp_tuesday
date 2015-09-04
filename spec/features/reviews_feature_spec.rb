@@ -26,7 +26,7 @@ feature 'reviewing' do
       click_button 'Leave Review'
     end
 
-    scenario 'user can see the delete review link on thier reviews' do
+    xscenario 'user can see the delete review link on thier reviews' do
       expect(page).to have_link 'Delete Review'
     end
 
@@ -35,9 +35,26 @@ feature 'reviewing' do
       expect(page).not_to have_content('so so')
     end
 
-    scenario 'other person is not able to delete the review' do
+    xscenario 'other person is not able to delete the review' do
     end
   end
+
+  def leave_review(thoughts, rating)
+    visit '/restaurants'
+    click_link 'Review KFC'
+    fill_in 'Thoughts', with: thoughts
+    select rating, from: 'Rating'
+    click_button 'Leave Review'
+  end
+
+  scenario 'displays an average rating for all reviews' do
+    user = build(:user)
+    user2 = build(:userina)
+    sign_up(user)
+    leave_review('So so', '3')
+    click_link 'Sign out'
+    sign_up(user2)
+    leave_review('Great', '5')
+    expect(page).to have_content('Average rating: 4')
+  end
 end
-
-

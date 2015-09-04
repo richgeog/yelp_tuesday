@@ -26,13 +26,16 @@ feature 'reviewing' do
       click_button 'Leave Review'
     end
 
-    scenario 'user can see the delete review link' do
+    scenario 'user can see the delete review link on thier reviews' do
       expect(page).to have_link 'Delete Review'
     end
 
-    scenario 'the person who left the review can delete it' do
+    xscenario 'the person who left the review can delete it' do
       click_link 'Delete Review'
       expect(page).not_to have_content('so so')
+    end
+
+    scenario 'other person is not able to delete the review' do
     end
   end
 end

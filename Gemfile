@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'aws-sdk'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'devise'
+gem 'dotenv'
 gem 'haml'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'

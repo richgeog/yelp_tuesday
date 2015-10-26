@@ -1,14 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'coffee-rails', '~> 4.1.0'
-gem 'database_cleaner'
 gem 'devise'
 gem 'haml'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'omniauth-facebook'
 gem 'pg'
-gem 'poltergeist'
 gem 'rails', '4.2.2'
 gem 'rake'
 gem 'sass-rails', '~> 5.0'
@@ -23,7 +21,9 @@ group :development, :test do
 
   group :test do
     gem 'capybara'
+    gem 'database_cleaner'
     gem 'factory_girl_rails'
+    gem 'poltergeist'
     gem 'rspec-collection_matchers'
     gem 'rspec-rails'
     gem 'shoulda'

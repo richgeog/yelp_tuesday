@@ -14,12 +14,23 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
   config.log_formatter = ::Logger::Formatter.new
   config.active_record.dump_schema_after_migration = false
+  # config.paperclip_defaults = {
+  #   :storage => :s3,
+  #   :s3_credentials => {
+  #     :bucket => ENV['S3_BUCKET_NAME'],
+  #     :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+  #     :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+  #   }
+  # }
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
-      :bucket => ENV['S3_BUCKET_NAME'],
-      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+      :url => 'literallyanything.s3-us-west-2.amazonaws.com',
+      :bucket => ENV["S3_BUCKET_NAME"],
+      :access_key_id => ENV["AWS_ACCESS_KEY_ID"],
+      :secret_access_key => ENV["AWS_SECRET_ACCESS_KEY"],
+      :path =>'/:class/:attachment/:id_partition/:style/:filename',
+      :s3_host_name => 's3-us-west-2.amazonaws.com'
     }
   }
 end

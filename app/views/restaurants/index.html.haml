@@ -1,7 +1,7 @@
 - if @restaurants.any?
   - @restaurants.each do |restaurant|
     %h2= link_to restaurant.name, restaurant_path(restaurant)
-    = image_tag restaurant.image.url(:thumb)
+    = image_tag restaurant.image.url(:medium)
     %h4= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant)
 
     -if current_user && current_user.id == restaurant.user_id

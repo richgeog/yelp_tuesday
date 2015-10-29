@@ -1,7 +1,7 @@
 - if @restaurants.any?
   - @restaurants.each do |restaurant|
     %h2= link_to restaurant.name, restaurant_path(restaurant)
-    = image_tag restaurant.image.url(:medium)
+    = image_tag restaurant.image.url(:thumb)
     %h4= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant)
 
     -if current_user && current_user.id == restaurant.user_id
@@ -32,4 +32,3 @@
 
 - if current_user
   %h4= link_to "Add a restaurant", new_user_restaurant_path(current_user.id)
-  / %a(href= new_restaurant_path(current_user)) Add a restaurant

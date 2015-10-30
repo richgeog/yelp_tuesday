@@ -2,7 +2,8 @@ class Restaurant < ActiveRecord::Base
 
   has_many :reviews,
     -> { extending WithUserAssociationExtension },
-     dependent: :restrict_with_exception
+     dependent: :restrict_with_exception,
+     dependent: :destroy
   belongs_to :user
   validates :name, length: {minimum: 3}, uniqueness: true
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'aws-sdk'
+gem 'aws-sdk', '<2.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'devise'
 gem 'dotenv'

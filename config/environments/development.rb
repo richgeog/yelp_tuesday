@@ -11,12 +11,15 @@ Rails.application.configure do
   config.assets.debug = true
   config.assets.digest = true
   config.assets.raise_runtime_errors = true
-  # config.paperclip_defaults = {
-  #   :storage => :s3,
-  #   :s3_credentials => {
-  #     :bucket => ENV['S3_BUCKET_NAME'],
-  #     :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-  #     :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-  #   }
-  # }
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :url => 'yelpclone1981.s3-eu-west-1.amazonaws.com',
+      :bucket => ENV["S3_BUCKET_NAME"],
+      :access_key_id => ENV["AWS_ACCESS_KEY_ID"],
+      :secret_access_key => ENV["AWS_SECRET_ACCESS_KEY"],
+      :path =>'/:class/:attachment/:id_partition/:style/:filename',
+      :s3_host_name => 's3-eu-west-1.amazonaws.com'
+    }
+  }
 end

@@ -8,7 +8,7 @@
       %h4= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete
 
     %h4= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant)
-    %h3
+    %h3.listc
       Review for
       = restaurant.name
 

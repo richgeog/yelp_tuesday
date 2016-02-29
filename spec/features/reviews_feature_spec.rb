@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 feature 'reviewing' do
-  before {Restaurant.create name: 'KFC'}
+  before { Restaurant.create name: 'KFC' }
 
   scenario 'allows users to leave a review using a form' do
-    user = build(:user)
-    sign_up(user)
-    visit '/restaurants'
+    user_signs_up_visits_restaurants_page
     click_link 'Review KFC'
     fill_in "Thoughts", with: "so so"
     select '3', from: 'Rating'
@@ -17,9 +15,7 @@ feature 'reviewing' do
 
   context 'deleting reviews' do
     before(:each) do
-      user = build(:user)
-      sign_up(user)
-      visit '/restaurants'
+      user_signs_up_visits_restaurants_page
       click_link 'Review KFC'
       fill_in "Thoughts", with: "so so"
       select '3', from: 'Rating'
@@ -56,5 +52,13 @@ feature 'reviewing' do
     sign_up(user2)
     leave_review('Great', '5')
     expect(page).to have_content('Average rating: ★★★★☆')
+  end
+
+  private
+
+  def user_signs_up_visits_restaurants_page
+    user = build(:user)
+    sign_up(user)
+    visit '/restaurants'
   end
 end

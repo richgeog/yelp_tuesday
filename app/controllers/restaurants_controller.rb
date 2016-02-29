@@ -12,12 +12,7 @@ class RestaurantsController < ApplicationController
 
   def create
     @user = user
-    @restaurant = @user.restaurants.create(restaurant_params)
-    if @restaurant.save
-      redirect_to restaurants_path
-    else
-      render 'new'
-    end
+    create_new_restaurant
   end
 
   def show
@@ -60,5 +55,14 @@ class RestaurantsController < ApplicationController
     return if current_user.id == @restaurant.user_id
     flash[:notice] = 'Unable to edit as not the creator'
     redirect_to restaurants_path
+  end
+
+  def create_new_restaurant
+    @restaurant = @user.restaurants.create(restaurant_params)
+    if @restaurant.save
+      redirect_to restaurants_path
+    else
+      render 'new'
+    end
   end
 end

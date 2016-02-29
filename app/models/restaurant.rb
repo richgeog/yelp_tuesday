@@ -1,8 +1,7 @@
 class Restaurant < ActiveRecord::Base
   has_many :reviews,
            -> { extending WithUserAssociationExtension },
-           dependent: :restrict_with_exception,
-           dependent: :destroy
+           dependent: :restrict_with_exception
   belongs_to :user
   validates :name, length: { minimum: 3 }, uniqueness: true
   has_attached_file :image, styles: { medium: '300x300>',

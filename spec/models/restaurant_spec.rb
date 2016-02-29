@@ -3,9 +3,9 @@ require 'spec_helper'
 
 describe Restaurant, type: :model do
 
-  # context 'relationship with reviews' do
-  #   it { is_expected.to have_many(:reviews).dependent(:restrict_with_exception) }
-  # end
+  context 'relationship with reviews' do
+    it { is_expected.to have_many(:reviews).dependent(:restrict_with_exception) }
+  end
 
   context 'relationship with user' do
     it { is_expected.to belong_to :user }

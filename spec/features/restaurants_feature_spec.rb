@@ -3,9 +3,7 @@ require 'rails_helper'
 feature 'restaurants' do
   context 'no restaurants have been added' do
     scenario 'should display a prompt to add a restaurant' do
-      user = build(:user)
-      sign_up(user)
-      visit '/restaurants'
+      user_signs_up_visits_restaurants_page
       expect(page).to have_content 'No restaurants yet'
       expect(page).to have_link 'Add a restaurant'
     end
@@ -30,9 +28,7 @@ feature 'restaurants' do
     end
 
     scenario 'user must be logged in before creating restaurant' do
-      user = build(:user)
-      sign_up(user)
-      visit '/restaurants'
+      user_signs_up_visits_restaurants_page
       click_link 'Add a restaurant'
       fill_in 'Name', with: 'KFC'
       click_button 'Create Restaurant'
@@ -53,9 +49,7 @@ feature 'restaurants' do
 
   context 'editing restaurants' do
     before(:each) do
-      user = build(:user)
-      sign_up(user)
-      visit '/restaurants'
+      user_signs_up_visits_restaurants_page
       click_link 'Add a restaurant'
       fill_in 'Name', with: 'KFC'
       click_button 'Create Restaurant'
@@ -83,9 +77,7 @@ feature 'restaurants' do
 
   context 'deleting restaurants' do
     before(:each) do
-      user = build(:user)
-      sign_up(user)
-      visit '/restaurants'
+      user_signs_up_visits_restaurants_page
       click_link 'Add a restaurant'
       fill_in 'Name', with: 'KFC'
       click_button 'Create Restaurant'
@@ -109,14 +101,20 @@ feature 'restaurants' do
 
   context 'an invalid restaurant' do
     it 'does not let you submit a name that is too short' do
-      user = build(:user)
-      sign_up(user)
-      visit 'restaurants'
+      user_signs_up_visits_restaurants_page
       click_link 'Add a restaurant'
       fill_in 'Name', with: 'kf'
       click_button 'Create Restaurant'
       expect(page).not_to have_css 'h2', text: 'kf'
       expect(page).to have_content 'error'
     end
+  end
+
+  private
+
+  def user_signs_up_visits_restaurants_page
+    user = build(:user)
+    sign_up(user)
+    visit '/restaurants'
   end
 end
